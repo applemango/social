@@ -1,0 +1,53 @@
+.textarea.textarea.textarea {
+    height: 100px;
+}
+.submit.submit.submit {
+    border: none;
+    padding: 0;
+}
+.post.post.post {
+    padding-bottom: 5px;
+}
+.comments {
+    display: block;
+    
+}
+.text {
+    margin: 0;
+}
+.comment_title {
+    margin: 1px 0;
+    color: #444;
+}
+.comment {
+    margin: 18px 5px;
+    .top {
+        display: flex;
+        p {
+            margin: 0;
+            font-size: 12px;
+            position: relative;
+            bottom: 1px;
+        }
+        p:last-child {
+            color: #888;
+            margin-left: 10px;
+            font-size: 12px;
+        }
+        span {
+            margin-right: 5px !important;
+            width: 16px !important;
+            border-radius: 100%;
+            border: 1px solid #eee !important;
+        }
+    }
+    > p {
+        margin: 2px 0 20px 0;
+    }
+}
+.icon {
+    border-radius: 100%;
+    border: 1px solid #eee;
+    width: 12px !important;
+    height: 12px !important;
+}

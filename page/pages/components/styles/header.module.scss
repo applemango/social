@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    /*border-bottom: 1px solid #ccc;*/
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+    overflow-x: auto;
+    .links {
+        margin-right: 10px;
+        display: flex;
+        .link_account {
+            background-color: #0070f3;
+            border-radius: 5px;
+            color: #fff;
+            padding: 5px 15px;
+            margin: 5px;
+            position: relative;
+            top: 18px;
+        }
+        .logout {
+            cursor: pointer;
+            border: 2px solid #0070f3;
+            color: #0070f3;
+            background-color: #fff;
+        }
+        .login {
+            border: 2px solid #0070f3;
+            color: #0070f3;
+            background-color: #fff;
+        }
+        .signUp {
+            border: 2px solid #0070f3;
+        }
+        .settings {
+            border: 2px solid #0070f3;
+            background-color: #0070f3;
+            width: 35px;
+            height: 35px;
+            //background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20class%3D%22icon%20icon-tabler%20icon-tabler-settings%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%230070f3%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%20%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%20%3Cpath%20d%3D%22M10.325%204.317c.426%20-1.756%202.924%20-1.756%203.35%200a1.724%201.724%200%200%200%202.573%201.066c1.543%20-.94%203.31%20.826%202.37%202.37a1.724%201.724%200%200%200%201.065%202.572c1.756%20.426%201.756%202.924%200%203.35a1.724%201.724%200%200%200%20-1.066%202.573c.94%201.543%20-.826%203.31%20-2.37%202.37a1.724%201.724%200%200%200%20-2.572%201.065c-.426%201.756%20-2.924%201.756%20-3.35%200a1.724%201.724%200%200%200%20-2.573%20-1.066c-1.543%20.94%20-3.31%20-.826%20-2.37%20-2.37a1.724%201.724%200%200%200%20-1.065%20-2.572c-1.756%20-.426%20-1.756%20-2.924%200%20-3.35a1.724%201.724%200%200%200%201.066%20-2.573c-.94%20-1.543%20.826%20-3.31%202.37%20-2.37c1%20.608%202.296%20.07%202.572%20-1.065z%22%20%2F%3E%20%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%223%22%20%2F%3E%3C%2Fsvg%3E');
+            background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20class%3D%22icon%20icon-tabler%20icon-tabler-settings%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%23ffffff%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%20%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%20%3Cpath%20d%3D%22M10.325%204.317c.426%20-1.756%202.924%20-1.756%203.35%200a1.724%201.724%200%200%200%202.573%201.066c1.543%20-.94%203.31%20.826%202.37%202.37a1.724%201.724%200%200%200%201.065%202.572c1.756%20.426%201.756%202.924%200%203.35a1.724%201.724%200%200%200%20-1.066%202.573c.94%201.543%20-.826%203.31%20-2.37%202.37a1.724%201.724%200%200%200%20-2.572%201.065c-.426%201.756%20-2.924%201.756%20-3.35%200a1.724%201.724%200%200%200%20-2.573%20-1.066c-1.543%20.94%20-3.31%20-.826%20-2.37%20-2.37a1.724%201.724%200%200%200%20-1.065%20-2.572c-1.756%20-.426%20-1.756%20-2.924%200%20-3.35a1.724%201.724%200%200%200%201.066%20-2.573c-.94%20-1.543%20.826%20-3.31%202.37%20-2.37c1%20.608%202.296%20.07%202.572%20-1.065z%22%20%2F%3E%20%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%223%22%20%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: center;
+            //animation: setting_icon 3s cubic-bezier(0, 0, 0, 0) 0s infinite normal;
+        }
+    }
+    .searchbox {
+        .search {
+            height: 35px;
+            border: none;
+            background-color: #eee;
+            border-radius: 5px;
+        }
+    }
+    .title {
+        display: flex;
+        margin-left: 10px;
+        a {
+            display: flex;
+        }
+        .logo {
+            margin-left: 15px;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            //display: none;
+            //width: 60px;
+            //height: 60px;
+            //background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20class%3D%22icon%20icon-tabler%20icon-tabler-math-function%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%23444444%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%20%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%20%3Cpath%20d%3D%22M14%2010h1c1%200%201%201%202.016%203.527c.984%202.473%20.984%203.473%201.984%203.473h1%22%20%2F%3E%20%3Cpath%20d%3D%22M13%2017c1.5%200%203%20-2%204%20-3.5s2.5%20-3.5%204%20-3.5%22%20%2F%3E%20%3Cpath%20d%3D%22M3%2019c0%201.5%20.5%202%202%202s2%20-4%203%20-9s1.5%20-9%203%20-9s2%20.5%202%202%22%20%2F%3E%20%3Cline%20x1%3D%225%22%20y1%3D%2212%22%20x2%3D%2211%22%20y2%3D%2212%22%20%2F%3E%3C%2Fsvg%3E');
+            //background-repeat: no-repeat;
+            //background-position: center;
+            > P {
+                font-family: 'Mochiy Pop One', sans-serif;
+                font-weight: 600;
+                font-size: 36px;
+                margin: 0;
+                color: #2c3e50;
+            }
+            > div {
+                width: 18px;
+                height: 18px;
+                //background-color: #45aaf27e;
+                background-color: #2c3e50;
+                //box-shadow: #45aaf2 0px 0px 2px 1px;
+                border-radius: 100%;
+                //background-image: linear-gradient( 135deg, #5EFCE8aa 10%, #736EFEaa 100%);
+                position: relative;
+                top: 3px;
+                right: 5px;
+                scale: 1;
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70% ;
+                animation: logo 5s cubic-bezier(0, 0, 0, 0) 0s infinite normal;//The liner does not work.
+            }
+        }
+        .heading {
+            color: #252525;
+            margin: 0;
+            height: fit-content;
+            position: relative;
+            top: 5px;
+        }
+    }
+}
+@keyframes setting_icon {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}
+@keyframes logo {
+    0% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70% ;
+        scale: 1;
+    }
+    20% {
+        border-radius: 34% 66% 42% 58% / 52% 30% 70% 48% ;
+        scale: 1.1;
+    }
+    40% {
+        border-radius: 19% 81% 35% 65% / 36% 47% 53% 64% ;
+        scale: 0.95;
+    }
+    60% {
+        border-radius: 86% 14% 60% 40% / 36% 64% 36% 64% ;
+        scale: 1.2;
+    }
+    80% {
+        border-radius: 33% 67% 75% 25% / 50% 44% 56% 50% ;
+        scale: 0.9;
+    }
+    100% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70% ;
+        scale: 1;
+    }
+}

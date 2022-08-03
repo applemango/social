@@ -1,0 +1,27 @@
+.icon_settings {
+    display: block;
+    > p {
+        margin-left: 18px;
+        color: #00b341;
+    }
+    .icon_input {
+        width: 100%;
+    }
+    .top {
+        margin-left: 18px;
+        display: flex;
+        justify-content: space-between;
+        .submit {
+            border-top: none;
+            position: relative;
+            top: 15px;
+        }
+        button {
+            height: 30px;
+            border: none;
+        }
+        h2 {
+            color: #333;
+        }
+    }
+}
