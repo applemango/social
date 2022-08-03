@@ -3,8 +3,8 @@ export function floor(n:number,p:number = 1) {
 }
 export function dateConversion(date:Date): string {
     const time_jst = Date.now()
-    //const time = time_jst-(1000*60*60*9) 
-    const time = time_jst
+    const time = time_jst-(1000*60*60*9) 
+    //const time = time_jst
     const timestamp = new Date(date).getTime()
     const milliseconds = Math.abs(timestamp - time)
     const seconds = Math.floor(milliseconds / 1000)

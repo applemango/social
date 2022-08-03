@@ -160,3 +160,7 @@ cython_debug/
 #.idea/
 *.db
 route_list.txt
+
+icons/
+icons/!d.png
+images/*
