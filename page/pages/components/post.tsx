@@ -7,6 +7,8 @@ import styles from "./styles/post.module.scss"
 
 import Text from "./text"
 
+import Post_image from "./post_image"
+
 import { getUrl } from "../../lib/main"
 import { likeAndDislike } from "../../lib/send"
 import { dateConversion } from "../../lib/utility"
@@ -94,14 +96,7 @@ const Post = ({data}:Props) => {
                         <div>
                             <h3 className = { styles.title}>{data.title}</h3>
                             <div className = { styles.image }>
-                                <Image
-                                    loader={myLoader_}
-                                    layout={"fill"}
-                                    objectFit={"contain"}
-                                    src={getUrl(`images/${data.text}`)}
-                                    alt="icon"
-                                    className={ styles.icon_ }
-                                />
+                                <Post_image link={data.text} />
                             </div>
                         </div>
                     )}
@@ -137,3 +132,18 @@ const Post = ({data}:Props) => {
     )
 }
 export default Post
+/*
+                        <div>
+                            <h3 className = { styles.title}>{data.title}</h3>
+                            <div className = { styles.image }>
+                                <Image
+                                    loader={myLoader_}
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+                                    src={getUrl(`images/${data.text}`)}
+                                    alt="icon"
+                                    className={ styles.icon_ }
+                                />
+                            </div>
+                        </div>
+*/
