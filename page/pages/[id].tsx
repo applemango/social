@@ -20,17 +20,21 @@ import { comment } from "../lib/send"
 
 import Header from "./components/header"
 
-const Comment:NextPage = () => {
 
+//const Comment:NextPage = ({id, post_data, comment_data}:any) => {
+const Comment:NextPage = ({id}:any) => {
     const router = useRouter()
-    const [login, setLogin] = useState(false)
+    const [login, setLogin] = useState(isLogin())
     const [postData, setPostData] = useState({})
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
     const [comments, setComments] = useState([{}])
+    const [loading, setLoading] = useState(true)
+    const [notFound, setNotFound] = useState(false)
 
     async function get_post(id:number) {
         const res = await get_post_one(id)
+        //const res = {"data":post_data}
         if (res) {
             data(res)
             return
@@ -54,13 +58,14 @@ const Comment:NextPage = () => {
     }
     async function getComments() {
         const res = await get_comment(Number(router.query.id))
+        //const res = {"data":comment_data}
         if(res) {
             const comment = JSON.parse(res.data)
             let r:any = [];
             comment.forEach((c:any, index:number) => {
                 r.push({
                     "title":c.title
-                    ,"text":c.text
+                    ,"text":c.text ? c.text : " "
                     ,"timestamp":c.timestamp
                     ,"username":c.username
                     ,"icon":c.icon
@@ -68,6 +73,7 @@ const Comment:NextPage = () => {
             });
             setComments([...comments,...r])
         }
+        setLoading(false)
     }
     async function post() {
         const id = Number(router.query.id)
@@ -76,7 +82,7 @@ const Comment:NextPage = () => {
             const d = res.data
             const r = [{
                 "title":title
-                ,"text":body
+                ,"text":body ? body : " "
                 ,"timestamp":"now"
                 ,"username":d.username
                 ,"icon":d.icon
@@ -86,17 +92,30 @@ const Comment:NextPage = () => {
             setBody("")
         }
     }
+    //useEffect(() => {
+    //    const id = Number(router.query.id)
+    //    setLogin(isLogin())
+    //    if(id && typeof id == "number") {
+    //        get_post(id)
+    //    }
+    //},[router.query.id])
     useEffect(() => {
-        const id = Number(router.query.id)
-        setLogin(isLogin())
-        if(id && typeof id == "number") {
-            get_post(id)
-        }
-    },[router.query.id])
+        //if(post_data) {
+        //    get_post(id)
+        //} else {
+        //    setNotFound(true)
+        //}
+        get_post(id)
+    },[])
     return (
         <div>
             <Header />
-            { postData && (
+            { notFound && (
+                <div>
+                    <h1>Not Found</h1>
+                </div>
+            )}
+            { !loading && (
                 <div>
                     <div>
                         <Post data={postData} />
@@ -124,7 +143,7 @@ const Comment:NextPage = () => {
                                 </div>
                             ):""
                         ))}
-                        { !(comments.length > 1) && (
+                        { (!(comments.length > 1) && !loading ) && (
                             <h1>No comments yet.</h1>
                         )}
                     </div>
@@ -132,6 +151,19 @@ const Comment:NextPage = () => {
             )}
         </div>
     );
+}
+
+export async function getServerSideProps(context:any) {
+    const id = Number(context.query.id)
+    //const post_data:any = await get_post_one(id)//ssrだとlocalStorageにアクセスできないが
+    //const comment_data:any = await get_comment(id)
+    return {
+        props: {
+            "id":id
+            //,"post_data": post_data.data ? post_data.data : null
+            //,"comment_data": comment_data.data ? comment_data.data : null
+        }
+    }
 }
 
 export default Comment;

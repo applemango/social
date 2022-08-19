@@ -16,6 +16,7 @@ app.config.from_mapping(
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
     ,SQLALCHEMY_TRACK_MODIFICATIONS = False
+    ,SECRET_KEY = "secret"
     ,JWT_SECRET_KEY = "secret"
     ,JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=3)
     ,JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
@@ -534,4 +535,6 @@ def test():
     return jsonify("ok")
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=3000)
+    app.run(debug=True, host='0.0.0.0', port=3000)
+    #from waitress import serve
+    #serve(app, host="0.0.0.0", port=3000)
