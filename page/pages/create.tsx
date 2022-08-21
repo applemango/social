@@ -9,6 +9,7 @@ import { isLogin } from "../lib/token"
 import { post, post_image } from "../lib/send"
 
 import Header from "./components/header"
+import Heads from "./components/heads"
 
 const Create = () => {
     const router = useRouter()
@@ -57,6 +58,7 @@ const Create = () => {
     },[])
     return (
         <div>
+            <Heads title={"social.abc - Create Post"} description={"None"} />
             <Header />
             { show && (
                 <div className = {` ${postStyles.post} ${styles.main} `} >

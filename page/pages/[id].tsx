@@ -19,6 +19,7 @@ import { get_post_one, get_comment } from "../lib/get"
 import { comment } from "../lib/send"
 
 import Header from "./components/header"
+import Heads from "./components/heads"
 
 
 //const Comment:NextPage = ({id, post_data, comment_data}:any) => {
@@ -31,6 +32,7 @@ const Comment:NextPage = ({id}:any) => {
     const [comments, setComments] = useState([{}])
     const [loading, setLoading] = useState(true)
     const [notFound, setNotFound] = useState(false)
+    const [headTitle,setHeadTitle] = useState("Not found")
 
     async function get_post(id:number) {
         const res = await get_post_one(id)
@@ -54,6 +56,7 @@ const Comment:NextPage = ({id}:any) => {
             ,"comments":data.comments
             ,"icon":data.icon
         })
+        setHeadTitle(data.title)
         getComments()
     }
     async function getComments() {
@@ -109,6 +112,7 @@ const Comment:NextPage = ({id}:any) => {
     },[])
     return (
         <div>
+            <Heads title={"social.abc - post : " + headTitle } description={"None"} />
             <Header />
             { notFound && (
                 <div>

@@ -63,6 +63,7 @@ export async function refresh() {
         localStorage.setItem("token", res.data.access_token)
         return {"msg":"success","code": res.status,"text": res.statusText,"data":res}
     } catch (error: any) {
+        const r = await logout()
         return {"msg":"error", "code": error.response.status, "text": error.response.data.msg, "data": error}
     }
 }

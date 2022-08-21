@@ -40,7 +40,7 @@ const Post = ({data}:Props) => {
     async function like(n:number) {
         const res = await likeAndDislike(n)
         if(res) {
-            setRating(getRanting())
+            setRating(res.rating)
             setPostLike(res.like)
         } else {
             router.replace("/login")
@@ -49,7 +49,7 @@ const Post = ({data}:Props) => {
     async function dislike(n:number) {
         const res = await likeAndDislike(n,false)
         if(res) {
-            setRating(getRanting())
+            setRating(res.rating)
             setPostLike(res.like)
         } else {
             router.replace("/login")

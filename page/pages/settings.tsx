@@ -9,6 +9,7 @@ import { isLogin } from "../lib/token"
 import { set_icon } from "../lib/settings"
 
 import Header from "./components/header"
+import Heads from "./components/heads"
 
 const Create = () => {
     const router = useRouter()
@@ -39,6 +40,7 @@ const Create = () => {
     })
     return (
         <div>
+            <Heads title={"social.abc - Settings"} description={"None"} unIndex={true} />
             <Header />
             { show && (
                 <div>

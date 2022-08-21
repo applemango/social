@@ -7,6 +7,8 @@ import Link from "next/link";
 
 import { login, signUp, isLogin } from "../lib/token"
 
+import Heads from "./components/heads"
+
 const Login: NextPage = () => {
     const router = useRouter();
     const [sign, setSign] = useState(false)
@@ -41,6 +43,7 @@ const Login: NextPage = () => {
     }
     return (
         <div>
+            <Heads title={"social.abc - Login"} description={"None"} />
             <div className = { style.main }>
                 {sign ? 
                     (<h1 className = { style.title }>welcome</h1>): 
