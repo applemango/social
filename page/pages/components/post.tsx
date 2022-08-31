@@ -68,66 +68,72 @@ const Post = ({data}:Props) => {
                 <p className = {` ${styles.rate} ${rating < 0 ? (styles.rate_minus) : (rating > 0 ? (styles.rate_plus) : (""))} `}>{!rating ? 0 : rating}</p>
                 <button className = {` ${styles.dislike} ${postLike == false ? (styles.dislike_active) : ("")} `} onClick = { () => dislike(data.id) }></button>
             </div>
-            <div className = { styles.main }>
-                <div className = { styles.data }>
-                    <div className = { styles.icon }>
-                        <Image
-                            loader={myLoader}
-                            src={getUrl(`icons/${img}`)}
-                            alt="icon"
-                            width={128}
-                            height={128}
-                            className={ styles.icon_ }
-                        />
-                    </div>
-                    <div className = { styles.data_list }>
-                        <p className = { styles.username}>{data.username}</p>
-                        <p>{time}</p>
-                    </div>
-                </div>
-                <div className = { styles.main_ }>
-                    { data.type == "post" && (
-                        <div>
-                            <h3 className = { styles.title}>{data.title}</h3>
-                            <Text className = { styles.text } text={data.text} />
-                        </div>
-                    )}
-                    { data.type == "image" && (
-                        <div>
-                            <h3 className = { styles.title}>{data.title}</h3>
-                            <div className = { styles.image }>
-                                <Post_image link={data.text} />
+            <Link href={`/?id=${data.id}`} as={`/post/${data.id}`}>
+                <a>
+                    <div className = { styles.main }>
+                        <div className = { styles.data }>
+                            <div className = { styles.icon }>
+                                <Image
+                                    loader={myLoader}
+                                    src={getUrl(`icons/${img}`)}
+                                    alt="icon"
+                                    width={128}
+                                    height={128}
+                                    className={ styles.icon_ }
+                                />
+                            </div>
+                            <div className = { styles.data_list }>
+                                <p className = { styles.username}>{data.username}</p>
+                                <p>{time}</p>
                             </div>
                         </div>
-                    )}
-                    { data.type == "url" && (
-                        <div>
-                            <h3 className = { styles.title}>{data.title}</h3>
-                            <a href={data.text} className = { styles.link} rel="noopener noreferrer" target="_blank">{data.text}</a>
+                        <div className = { styles.main_ }>
+                            { data.type == "post" && (
+                                <div>
+                                    <h3 className = { styles.title}>{data.title}</h3>
+                                    <Text className = { styles.text } text={data.text} />
+                                </div>
+                            )}
+                            { data.type == "image" && (
+                                <div>
+                                    <h3 className = { styles.title}>{data.title}</h3>
+                                    <div className = { styles.image }>
+                                        <Post_image link={data.text} />
+                                    </div>
+                                </div>
+                            )}
+                            { data.type == "url" && (
+                                <div>
+                                    <h3 className = { styles.title}>{data.title}</h3>
+                                    <a href={data.text} className = { styles.link} rel="noopener noreferrer" target="_blank">{data.text}</a>
+                                </div>
+                            )}
                         </div>
-                    )}
-                </div>
-                <div className = { styles.data_bottom}>
-                    <Link href={"/"+data.id}>
-                        <a target="">
-                            <div className = { styles.bottom_button}>
-                                <div className = {`${styles.bottom_icon} ${styles.bottom_icon_comment}`}></div>
-                                <p>{data.comments}</p>
-                                <p> Comments</p>
+                        <div style={{display:"none"}}>
+                            <div className = { styles.data_bottom}>
+                                <Link href={"/"+data.id}>
+                                    <a target="">
+                                        <div className = { styles.bottom_button}>
+                                            <div className = {`${styles.bottom_icon} ${styles.bottom_icon_comment}`}></div>
+                                            <p>{data.comments}</p>
+                                            <p> Comments</p>
+                                        </div>
+                                    </a>
+                                </Link>
+                                <div className = { styles.bottom_button} onClick={() => setShare(!share) }>
+                                    <div className = {`${styles.bottom_icon} ${styles.bottom_icon_share}`}></div>
+                                    <p>Share</p>
+                                </div>
                             </div>
-                        </a>
-                    </Link>
-                    <div className = { styles.bottom_button} onClick={() => setShare(!share) }>
-                        <div className = {`${styles.bottom_icon} ${styles.bottom_icon_share}`}></div>
-                        <p>Share</p>
+                            { share && (
+                                <div className = { styles.share}>
+                                    <Link href={link}><a className = { styles.link }>{link}</a></Link>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </div>
-                { share && (
-                    <div className = { styles.share}>
-                        <Link href={link}><a className = { styles.link }>{link}</a></Link>
-                    </div>
-                )}
-            </div>
+                </a>
+            </Link>
         </div>
     )
 }

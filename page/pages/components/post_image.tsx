@@ -16,6 +16,7 @@ const Post_image = ({ link }:Props) => {
         <div>
             <TransformWrapper
             minScale={0.5}
+            disabled={true}
             >
                 <TransformComponent>
                     <div>

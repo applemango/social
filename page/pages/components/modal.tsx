@@ -1,37 +1,23 @@
+import styles from "./styles/modal.module.scss"
+
 import type { NextPage } from 'next'
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import Post from "./post"
+import Icon from "./icon"
+import Text from "./text"
+import idStyles from "../styles/id.module.scss"
+import postStyles from "./styles/post.module.scss"
+import createStyles from "../styles/create.module.scss"
+import { dateConversion } from "../../lib/utility"
+import { isLogin } from "../../lib/token"
+import { get_post_one, get_comment } from "../../lib/get"
+import { comment } from "../../lib/send"
+import Header from "./header"
+import Heads from "./heads"
 
-import Post from "./components/post"
-
-import Icon from "./components/icon"
-
-import Text from "./components/text"
-
-import styles from "./styles/id.module.scss"
-import postStyles from "./components/styles/post.module.scss"
-import createStyles from "./styles/create.module.scss"
-
-
-import { dateConversion } from "../lib/utility"
-import { isLogin } from "../lib/token"
-import { get_post_one, get_comment } from "../lib/get"
-import { comment } from "../lib/send"
-
-import Header from "./components/header"
-import Heads from "./components/heads"
-
-
-//const Comment:NextPage = ({id, post_data, comment_data}:any) => {
-const Comment:NextPage = (/*{id}:any*/) => {
+const Post_ = ({id}:any) => {
     const router = useRouter()
-    const { id } = router.query
-    useEffect(() => {
-        if(!id) return
-        router.push(`/?id=${id}`)
-    })
-    return <p>redirect...</p>
-    /*const router = useRouter()
     const [login, setLogin] = useState(isLogin())
     const [postData, setPostData] = useState({})
     const [title, setTitle] = useState("")
@@ -43,7 +29,6 @@ const Comment:NextPage = (/*{id}:any*/) => {
 
     async function get_post(id:number) {
         const res = await get_post_one(id)
-        //const res = {"data":post_data}
         if (res) {
             data(res)
             return
@@ -102,25 +87,12 @@ const Comment:NextPage = (/*{id}:any*/) => {
             setBody("")
         }
     }
-    //useEffect(() => {
-    //    const id = Number(router.query.id)
-    //    setLogin(isLogin())
-    //    if(id && typeof id == "number") {
-    //        get_post(id)
-    //    }
-    //},[router.query.id])
     useEffect(() => {
-        //if(post_data) {
-        //    get_post(id)
-        //} else {
-        //    setNotFound(true)
-        //}
         get_post(id)
     },[])
     return (
         <div>
             <Heads title={"social.abc - post : " + headTitle } description={"None"} />
-            <Header />
             { notFound && (
                 <div>
                     <h1>Not Found</h1>
@@ -132,25 +104,25 @@ const Comment:NextPage = (/*{id}:any*/) => {
                         <Post data={postData} />
                     </div>
                     { login && (
-                        <div className = {`${createStyles.main__} ${styles.post} ${postStyles.post}`}>
+                        <div className = {`${createStyles.main__} ${idStyles.post} ${postStyles.post}`}>
                             <input value = {title} onChange = {(event) => {setTitle(event.target.value)} } type="text" className = {createStyles.input_title} placeholder = {"title"} />
-                            <textarea value = {body} onChange = {(event) => {setBody(event.target.value)} } className = {`${createStyles.input_body} ${ styles.textarea }`} placeholder = {"Text (optional)"}></textarea>
-                            <div className = {` ${createStyles.submit} ${ styles.submit } `} >
+                            <textarea value = {body} onChange = {(event) => {setBody(event.target.value)} } className = {`${createStyles.input_body} ${ idStyles.textarea }`} placeholder = {"Text (optional)"}></textarea>
+                            <div className = {` ${createStyles.submit} ${ idStyles.submit } `} >
                                 <button onClick={() => post()} >Post</button>
                             </div>
                         </div>
                     )}
-                    <div className = {`${postStyles.post} ${styles.comments}`}>
+                    <div className = {`${postStyles.post} ${idStyles.comments}`}>
                         { comments.length > 0 && comments.map((c:any, index:number) => (
                             c.text ? (
-                                <div key = {index} className = {`${styles.comment}`}>
-                                    <div className = {styles.top}>
-                                        <Icon width={12} height={12} className = {styles.icon} name={c.icon} />
+                                <div key = {index} className = {`${idStyles.comment}`}>
+                                    <div className = {idStyles.top}>
+                                        <Icon width={12} height={12} className = {idStyles.icon} name={c.icon} />
                                         <p>{c.username}</p>
                                         <p>{dateConversion(c.timestamp)}</p>
                                     </div>
-                                    <h4 className = {styles.comment_title}>{c.title}</h4>
-                                    <Text text = {c.text} className = {styles.text}/>
+                                    <h4 className = {idStyles.comment_title}>{c.title}</h4>
+                                    <Text text = {c.text} className = {idStyles.text}/>
                                 </div>
                             ):""
                         ))}
@@ -161,20 +133,7 @@ const Comment:NextPage = (/*{id}:any*/) => {
                 </div>
             )}
         </div>
-    );*/
+    );
 }
-/*
-export async function getServerSideProps(context:any) {
-    const id = Number(context.query.id)
-    //const post_data:any = await get_post_one(id)//ssrだとlocalStorageにアクセスできないが
-    //const comment_data:any = await get_comment(id)
-    return {
-        props: {
-            "id":id
-            //,"post_data": post_data.data ? post_data.data : null
-            //,"comment_data": comment_data.data ? comment_data.data : null
-        }
-    }
-}
-*/
-export default Comment;
+
+export default Post_
