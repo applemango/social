@@ -161,6 +161,12 @@ cython_debug/
 *.db
 route_list.txt
 
-icons/
-icons/!d.png
-images/*
+#icons/
+#icons/!d.png
+#images/
+#images/!d.png
+*.png
+*.jpg
+*.jpeg
+!d.png
+!undefined.png

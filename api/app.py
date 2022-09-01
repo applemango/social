@@ -33,6 +33,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(128))
+    #description = db.Column(db.String(1024))
     user_icon = db.Column(db.String(512), default = "d.png")
     def set_password(self, password):
         self.password = generate_password_hash(password)

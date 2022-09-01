@@ -15,8 +15,10 @@ import { dateConversion } from "../../lib/utility"
 
 type Props = {
     data: any
+    className?: any
+    movePostImage?: boolean
 }
-const Post = ({data}:Props) => {
+const Post = ({data, className, movePostImage = false }:Props) => {
     const router = useRouter();
     const [share, setShare] = useState(false)
     const [rating, setRating] = useState(getRanting())
@@ -62,7 +64,7 @@ const Post = ({data}:Props) => {
         return getUrl(`images/${data.text}`)
     }
     return (
-        <div className = { styles.post } >
+        <div className = {` ${styles.post} ${className} `} >
             <div className  = { styles.rating }>
                 <button className = {` ${styles.like} ${postLike ? (styles.like_active) : ("")} `} onClick = {() => like(data.id)}></button>
                 <p className = {` ${styles.rate} ${rating < 0 ? (styles.rate_minus) : (rating > 0 ? (styles.rate_plus) : (""))} `}>{!rating ? 0 : rating}</p>
@@ -98,7 +100,7 @@ const Post = ({data}:Props) => {
                                 <div>
                                     <h3 className = { styles.title}>{data.title}</h3>
                                     <div className = { styles.image }>
-                                        <Post_image link={data.text} />
+                                        <Post_image link={data.text} move={movePostImage} />
                                     </div>
                                 </div>
                             )}

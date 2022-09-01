@@ -5,7 +5,6 @@ import styles from './styles/index.module.scss'
 import Posts from "./components/posts"
 import Header from "./components/header"
 import Heads from "./components/heads"
-
 import Post from "./components/modal"
 
 import { useRouter } from "next/router";
@@ -28,9 +27,6 @@ const Home: NextPage = () => {
                 onRequestClose={() => router.push("/")}
                 contentLabel="post modal"
             >
-                {
-                    //<Post id={router.query.id}/>
-                }
                 <div className={styles.modal_}>
                     <Post id={router.query.id} />
                 </div>

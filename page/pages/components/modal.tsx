@@ -101,7 +101,7 @@ const Post_ = ({id}:any) => {
             { !loading && (
                 <div>
                     <div>
-                        <Post data={postData} />
+                        <Post data={postData} className={styles.post} movePostImage={true} />
                     </div>
                     { login && (
                         <div className = {`${createStyles.main__} ${idStyles.post} ${postStyles.post}`}>
@@ -112,7 +112,7 @@ const Post_ = ({id}:any) => {
                             </div>
                         </div>
                     )}
-                    <div className = {`${postStyles.post} ${idStyles.comments}`}>
+                    <div className = {`${postStyles.post} ${idStyles.comments} ${styles.comments}`}>
                         { comments.length > 0 && comments.map((c:any, index:number) => (
                             c.text ? (
                                 <div key = {index} className = {`${idStyles.comment}`}>
