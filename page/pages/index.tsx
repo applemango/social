@@ -7,6 +7,9 @@ import Header from "./components/header"
 import Heads from "./components/heads"
 import Post from "./components/modal"
 
+import { follow, unFollow } from "../lib/send"
+import { get_post_follow } from "../lib/get"
+
 import { useRouter } from "next/router";
 import Modal from 'react-modal'
 Modal.setAppElement('#__next')
@@ -15,6 +18,30 @@ const Home: NextPage = () => {
     const router = useRouter()
     return (
         <>
+            {
+                /*<button onClick={() => {
+                    async function f() {
+                        const res = await follow("mango")
+                        console.log(res)
+                    }
+                    f()
+                }}>Follow</button>
+                <button onClick={() => {
+                    async function f() {
+                        const res = await unFollow("mango")
+                        console.log(res)
+                    }
+                    f()
+                }}>unFollow</button>
+                <button onClick={() => {
+                    async function f() {
+                        const res = await get_post_follow(0,10)
+                        const data = JSON.parse(res)
+                        console.log(data)
+                    }
+                    f()
+                }}>getFollowPost</button>*/
+            }
             <Modal
                 className={styles.modal}
                 style={{

@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 
 import InfiniteScroll from 'react-infinite-scroller'; 
 
-import { get_post } from "../../lib/get"
+import { get_post, get_post_follow } from "../../lib/get"
 import { isLogin } from '../../lib/token';
 
 import Post from "./post"
@@ -23,18 +23,22 @@ const Posts: NextPage = () => {
     const [loadEnd, setLoadEnd] = useState(false)
 
     const [posts, setPosts]:any = useState([{}])
-    const [postsStart, setPostsStart] = React.useState(0)
-    const [postsOneLoad, setPostsOneLoad] = React.useState(10)
-    const [sort, setSort] = React.useState("new")
-
+    const [postsStart, setPostsStart] = useState(0)
+    const [postsOneLoad, setPostsOneLoad] = useState(10)
     const [login, setLogin] = useState(false)
+    const [sort, setSort] = useState(login ? "follow" : "new")
 
     const [screenHeight, setScreenHeight] = useState(0)
 
     const router = useRouter();
 
     const loadMore = async (page:any) => {
-        const res = await get_post(postsStart,postsStart+postsOneLoad,sort)
+        let res;
+        if(sort == "follow") {
+            res = await get_post_follow(postsStart, postsStart + postsOneLoad)
+        } else {
+            res = await get_post(postsStart,postsStart+postsOneLoad,sort)
+        }
         const data = JSON.parse(res)
         if(!data || data.length < postsOneLoad) {
             setLoadEnd(true)
@@ -80,7 +84,13 @@ const Posts: NextPage = () => {
         }
         return r
     }
-    useEffect(() => {if(isLogin()){setLogin(true)}},[])
+    useEffect(() => {if(isLogin()){
+        setLogin(true)
+        setSort("follow")
+        setPosts([{}])
+        setPostsStart(0)
+        setLoadEnd(false)
+    }},[])
     function e() {if(window != undefined) {setScreenHeight(window.innerHeight)}}
     useEffect(() => {e()})
     return (
@@ -98,6 +108,19 @@ const Posts: NextPage = () => {
                 </div>
             )}
             <div className = {` ${postStyles.post} ${ postsStyles.sort} `}>
+                { login && (
+                    <div onClick = {() => {
+                        if(sort != "follow") {
+                            setSort("follow")
+                            setPosts([{}])
+                            setPostsStart(0)
+                            setLoadEnd(false)
+                        }
+                    } } className = { postsStyles.sortType }>
+                        <div className = {` ${postsStyles.logo} ${postsStyles.bolt} `}></div>
+                        <a className = { postsStyles.sortType_ }>follow</a>
+                    </div>
+                ) }
                 <div onClick = {() => {
                     if(sort != "new") {
                         setSort("new")

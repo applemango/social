@@ -12,6 +12,7 @@ import Post_image from "./post_image"
 import { getUrl } from "../../lib/main"
 import { likeAndDislike } from "../../lib/send"
 import { dateConversion } from "../../lib/utility"
+import { follow } from "../../lib/send"
 
 type Props = {
     data: any
@@ -57,6 +58,9 @@ const Post = ({data, className, movePostImage = false }:Props) => {
             router.replace("/login")
         }
     }
+    async function followUser() {
+        const res = await follow(data.username)
+    }
     const myLoader = ({scr}:any) => {
         return getUrl(`icons/${img}`);
     }
@@ -85,7 +89,14 @@ const Post = ({data, className, movePostImage = false }:Props) => {
                                 />
                             </div>
                             <div className = { styles.data_list }>
-                                <p className = { styles.username}>{data.username}</p>
+                                <div className={styles.name}>
+                                    <p className = { styles.username}>{data.username}</p>
+                                    <div className={styles.userHover}>
+                                        <div className = { styles.userHover_}>
+                                            <button className={styles.followButton} onClick={followUser}>Follow</button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <p>{time}</p>
                             </div>
                         </div>

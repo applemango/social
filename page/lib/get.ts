@@ -129,6 +129,29 @@ export async function get_post_one_login(id: number) {
     }
 }
 
+export async function get_post_follow(start:number = 0, end:number = 10) {
+    try {
+        const res = await axios.post(
+            getUrl("post/get/follow"),{
+                body: JSON.stringify(
+                    {
+                        start : start
+                        ,end  : end
+                    }
+                )
+            }, {
+                headers: {
+                    "Content-Type": "application/json;"
+                    ,"Authorization": "Bearer "+getToken()
+                }
+            }
+        )
+        return res.data
+    } catch (err) {
+        return false
+    }
+}
+
 export async function get_comment(id: number) {
     try {
         const res = await axios.get(

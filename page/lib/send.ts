@@ -99,3 +99,51 @@ export async function comment(title: string, body: string, id: number) {
     }
     return false
 }
+
+export async function follow(username: string) {
+    const login = await isLoginAndLogin()
+    if(login) {
+        try {
+            const res = await axios.post(
+                getUrl('follow'), {
+                    body: JSON.stringify({
+                        username: username
+                    })
+                }, {
+                    headers: {
+                        "Content-Type": "application/json;"
+                        ,'Authorization': 'Bearer '+getToken()
+                    }
+                }
+            )
+            return res
+        } catch (error: any) {
+            return false
+        }
+    }
+    return false
+}
+
+export async function unFollow(username: string) {
+    const login = await isLoginAndLogin()
+    if(login) {
+        try {
+            const res = await axios.post(
+                getUrl('unfollow'), {
+                    body: JSON.stringify({
+                        username: username
+                    })
+                }, {
+                    headers: {
+                        "Content-Type": "application/json;"
+                        ,'Authorization': 'Bearer '+getToken()
+                    }
+                }
+            )
+            return res
+        } catch (error: any) {
+            return false
+        }
+    }
+    return false
+}

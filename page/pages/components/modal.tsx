@@ -104,7 +104,7 @@ const Post_ = ({id}:any) => {
                         <Post data={postData} className={styles.post} movePostImage={true} />
                     </div>
                     { login && (
-                        <div className = {`${createStyles.main__} ${idStyles.post} ${postStyles.post}`}>
+                        <div className = {`${createStyles.main__} ${idStyles.post} ${postStyles.post} ${styles.create}`}>
                             <input value = {title} onChange = {(event) => {setTitle(event.target.value)} } type="text" className = {createStyles.input_title} placeholder = {"title"} />
                             <textarea value = {body} onChange = {(event) => {setBody(event.target.value)} } className = {`${createStyles.input_body} ${ idStyles.textarea }`} placeholder = {"Text (optional)"}></textarea>
                             <div className = {` ${createStyles.submit} ${ idStyles.submit } `} >
