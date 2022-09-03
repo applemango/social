@@ -12,7 +12,8 @@ import Post_image from "./post_image"
 import { getUrl } from "../../lib/main"
 import { likeAndDislike } from "../../lib/send"
 import { dateConversion } from "../../lib/utility"
-import { follow } from "../../lib/send"
+import { follow, unFollow } from "../../lib/send"
+import { isFollow } from "../../lib/get"
 
 type Props = {
     data: any
@@ -26,11 +27,19 @@ const Post = ({data, className, movePostImage = false }:Props) => {
     const [postLike,setPostLike] = useState(getLike())
     const time = dateConversion(getTimestamp())
     const [link, setLink] = useState("")
+    const [following, setFollowing] = useState(false)
     const img = getIcon()
     useEffect(() => {
         if(location != undefined) {
             setLink(`http://${location.host}/${data.id}`)
         }
+    },[])
+    useEffect(() => {
+        async function get_isFollowing() {
+            const res = await isFollow(data.username)
+            setFollowing(res)
+        }
+        get_isFollowing()
     },[])
     if(!data) {
         return (<div></div>)
@@ -60,6 +69,11 @@ const Post = ({data, className, movePostImage = false }:Props) => {
     }
     async function followUser() {
         const res = await follow(data.username)
+        setFollowing(true)
+    }
+    async function unFollowUser() {
+        const res = await unFollow(data.username)
+        setFollowing(false)
     }
     const myLoader = ({scr}:any) => {
         return getUrl(`icons/${img}`);
@@ -74,32 +88,36 @@ const Post = ({data, className, movePostImage = false }:Props) => {
                 <p className = {` ${styles.rate} ${rating < 0 ? (styles.rate_minus) : (rating > 0 ? (styles.rate_plus) : (""))} `}>{!rating ? 0 : rating}</p>
                 <button className = {` ${styles.dislike} ${postLike == false ? (styles.dislike_active) : ("")} `} onClick = { () => dislike(data.id) }></button>
             </div>
-            <Link href={`/?id=${data.id}`} as={`/post/${data.id}`}>
-                <a>
-                    <div className = { styles.main }>
-                        <div className = { styles.data }>
-                            <div className = { styles.icon }>
-                                <Image
-                                    loader={myLoader}
-                                    src={getUrl(`icons/${img}`)}
-                                    alt="icon"
-                                    width={128}
-                                    height={128}
-                                    className={ styles.icon_ }
-                                />
-                            </div>
-                            <div className = { styles.data_list }>
-                                <div className={styles.name}>
-                                    <p className = { styles.username}>{data.username}</p>
-                                    <div className={styles.userHover}>
-                                        <div className = { styles.userHover_}>
-                                            <button className={styles.followButton} onClick={followUser}>Follow</button>
-                                        </div>
-                                    </div>
+            <div className = { styles.main }>
+                <div className = { styles.data }>
+                    <div className = { styles.icon }>
+                        <Image
+                            loader={myLoader}
+                            src={getUrl(`icons/${img}`)}
+                            alt="icon"
+                            width={128}
+                            height={128}
+                            className={ styles.icon_ }
+                        />
+                    </div>
+                    <div className = { styles.data_list }>
+                        <div className={styles.name}>
+                            <p className = { styles.username}>{data.username}</p>
+                            <div className={styles.userHover}>
+                                <div className = { styles.userHover_}>
+                                    { following ? (
+                                        <button className={styles.followButton} onClick={unFollowUser}>unFollow</button>
+                                    ):(
+                                        <button className={styles.followButton} onClick={followUser}>Follow</button>
+                                    )}
                                 </div>
-                                <p>{time}</p>
                             </div>
                         </div>
+                        <p>{time}</p>
+                    </div>
+                </div>
+                <Link href={`/?id=${data.id}`} as={`/post/${data.id}`}>
+                    <a>
                         <div className = { styles.main_ }>
                             { data.type == "post" && (
                                 <div>
@@ -144,9 +162,9 @@ const Post = ({data, className, movePostImage = false }:Props) => {
                                 </div>
                             )}
                         </div>
-                    </div>
-                </a>
-            </Link>
+                    </a>
+                </Link>
+            </div>
         </div>
     )
 }

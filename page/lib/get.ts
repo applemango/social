@@ -162,3 +162,27 @@ export async function get_comment(id: number) {
         return false
     }
 }
+
+export async function isFollow(username: string) {
+    const login = await isLoginAndLogin()
+    if(login) {
+        try {
+            const res = await axios.post(
+                getUrl('isfollow'), {
+                    body: JSON.stringify({
+                        username: username
+                    })
+                }, {
+                    headers: {
+                        "Content-Type": "application/json;"
+                        ,'Authorization': 'Bearer '+getToken()
+                    }
+                }
+            )
+            return res.data
+        } catch (error: any) {
+            return false
+        }
+    }
+    return false
+}

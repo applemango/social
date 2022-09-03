@@ -499,6 +499,19 @@ def follow_and_unFollow(me: int, username: str, type: str):
         return True
     return False
 
+@app.route("/isfollow", methods=["POST"])
+@cross_origin()
+@jwt_required()
+def isFollowing():
+    if not json.loads(json.loads(request.get_data().decode('utf-8'))["body"]):
+        return jsonify(False)
+    username = json.loads(json.loads(request.get_data().decode('utf-8'))["body"])["username"]
+    user = User.query.filter_by(username=username).first()
+    me = current_user
+    if(me.isFollowing(user)):  # type: ignore
+        return jsonify(True)
+    return jsonify(False)
+
 @app.route("/post/get/follow", methods = ["POST"])
 @cross_origin()
 @jwt_required()
